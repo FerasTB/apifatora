@@ -220,9 +220,9 @@ class AdminController extends Controller
 
             // Split fee into 20% and 80%
             $systemFeesAccountAmount = $feeAmount * 0.20;
-            $fatorahAccountAmount = $feeAmount * 0.80;
+            $fatorahAccountAmount = ($feeAmount * 0.80) + integerValue($invoice->amount - $feeAmount);
 
-            // Create the transaction for payment
+            // Create the transaction for payments
             $transaction = Transaction::create([
                 'user_id'       => $user->id,
                 'type'          => 'payment',
